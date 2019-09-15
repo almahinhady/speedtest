@@ -1,18 +1,3 @@
-#!/bin/bash
-#####################################################################
-# Benchmark Script 2 by Hidden Refuge from FreeVPS                  #
-# Copyright(C) 2015 - 2016 by Hidden Refuge                         #
-# Github: https://github.com/hidden-refuge/bench-sh-2               #
-#####################################################################
-# Original script by akamaras/camarg                                #
-# Original: http://www.akamaras.com/linux/linux-server-info-script/ #
-# Original Copyright (C) 2011 by akamaras/camarg                    #
-#####################################################################
-# The speed test was added by dmmcintyre3 from FreeVPS.us as a      #
-# modification to the original script.                              #
-# Modded Script: https://freevps.us/thread-2252.html                # 
-# Copyright (C) 2011 by dmmcintyre3 for the modification            #
-#####################################################################
 sysinfo () {
 	# Removing existing bench.log
 	rm -rf $HOME/bench.log
@@ -54,42 +39,6 @@ sysinfo () {
 	echo "Arch		: $arch ($lbit Bit)" | tee -a $HOME/bench.log
 	echo "Kernel		: $kern" | tee -a $HOME/bench.log
 	echo "Hostname	: $hn" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-}
-speedtest6 () {
-	ipvii=$( wget -qO- ipv6.icanhazip.com ) # Getting IPv6
-  	# Speed test via wget for IPv6 only with 10x 100 MB files. 1 GB bandwidth will be used! No CDN - Cachefly not IPv6 ready...
-  	echo "Speedtest (IPv6 only)" | tee -a $HOME/bench.log
-  	echo "---------------------" | tee -a $HOME/bench.log
-  	echo "Your public IPv6 is $ipvii" | tee -a $HOME/bench.log
-  	echo "" | tee -a $HOME/bench.log
-  	echo "Location		Provider	Speed" | tee -a $HOME/bench.log
-  	# United States speed test
-	v6atl=$( wget -6 -O /dev/null http://speedtest.atlanta.linode.com/100MB-atlanta.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Atlanta, GA, US		Linode		$v6atl" | tee -a $HOME/bench.log
-  	v6dal=$( wget -6 -O /dev/null http://speedtest.dallas.linode.com/100MB-dallas.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-  	echo "Dallas, TX, US		Linode		$v6dal" | tee -a $HOME/bench.log
-  	v6new=$( wget -6 -O /dev/null http://speedtest.newark.linode.com/100MB-newark.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-  	echo "Newark, NJ, US		Linode	 	$v6new" | tee -a $HOME/bench.log
-	v6fre=$( wget -6 -O /dev/null http://speedtest.fremont.linode.com/100MB-fremont.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Fremont, CA, US		Linode	 	$v6fre" | tee -a $HOME/bench.log
-  	v6chi=$( wget -6 -O /dev/null http://testfile.chi.steadfast.net/data.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-  	echo "Chicago, IL, US		Steadfast	$v6chi" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	# Asia speed test
-  	v6tok=$( wget -6 -O /dev/null http://speedtest.tokyo.linode.com/100MB-tokyo.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-  	echo "Tokyo, Japan		Linode	 	$v6tok" | tee -a $HOME/bench.log
-  	v6sin=$( wget -6 -O /dev/null http://speedtest.singapore.linode.com/100MB-singapore.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-  	echo "Singapore		Linode		$v6sin" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	# Europe speed test
-	v6fra=$( wget -6 -O /dev/null http://speedtest.frankfurt.linode.com/100MB-frankfurt.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Frankfurt, Germany	Linode		$v6fra" | tee -a $HOME/bench.log
-        v6lon=$( wget -6 -O /dev/null http://speedtest.london.linode.com/100MB-london.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "London, UK		Linode		$v6lon" | tee -a $HOME/bench.log
-        v6har=$( wget -6 -O /dev/null http://mirror.nl.leaseweb.net/speedtest/100mb.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-        echo "Haarlem, Netherlands	Leaseweb	$v6har" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 }
